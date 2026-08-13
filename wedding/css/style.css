@@ -437,26 +437,57 @@ p, .rsvp-form label, .faq-item p {
 .rsvp-form input[type="text"]::placeholder { color: rgba(74,59,50,0.38); }
 .rsvp-form input[type="text"]:focus { outline: none; border-color: var(--crimson); }
 
-.rsvp-form__toggle { display: flex; gap: 12px; }
-.toggle-option {
+.rsvp-form__toggle {
+  position: relative;
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px;
+  background: var(--taupe);
+}
+.rsvp-form__toggle::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 999px;
+  background: var(--crimson);
+  box-shadow: 0 6px 16px -6px rgba(190,30,45,0.55);
+  transition: transform 0.4s var(--ease);
+}
+.rsvp-form__toggle:has(.toggle-option:last-child input:checked)::before {
+  transform: translateX(100%);
+}
+.rsvp-form .toggle-option {
+  position: relative;
+  z-index: 1;
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
+  gap: 8px;
+  padding: 13px 12px;
+  border-radius: 999px;
   cursor: pointer;
-  font-family: var(--font-body);
-  font-size: 15px;
-  text-transform: none;
-  letter-spacing: 0;
-  color: var(--espresso);
-  transition: all 0.2s var(--ease);
+  font-family: var(--font-label);
+  font-size: 13px;
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--espresso-soft);
+  text-align: center;
+  transition: color 0.3s var(--ease);
 }
-.toggle-option:has(input:checked) { border-color: var(--crimson); background: rgba(190,30,45,0.06); color: var(--crimson); }
-.toggle-option input { accent-color: var(--crimson); }
+.toggle-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.rsvp-form .toggle-option:has(input:checked) { color: var(--warm-white); }
 
 .rsvp-form__submit-row { display: flex; justify-content: center; margin-top: 8px; }
 .rsvp-form__submit-row .btn { width: 100%; max-width: 280px; }
@@ -620,5 +651,5 @@ p, .rsvp-form label, .faq-item p {
   .countdown__unit { min-width: 44px; padding-right: 12px; }
   .countdown__value { font-size: 24px; }
   .proposal-grid { grid-template-columns: 1fr 1fr; }
-  .rsvp-form__toggle { flex-direction: column; }
+  .rsvp-form .toggle-option { font-size: 11px; letter-spacing: 0.02em; padding: 13px 6px; }
 }
