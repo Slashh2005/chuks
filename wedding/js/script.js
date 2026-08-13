@@ -37,10 +37,7 @@
     { src: 'assets/images/proposal-arch-kiss.jpg', alt: "Chukwuma and Ellen embracing beneath a floral arch reading 'Will You Marry Me?'", tag: 'Proposal', category: 'proposal' },
     { src: 'assets/images/proposal-bouquet-kiss.jpg', alt: 'Chukwuma and Ellen kissing, holding a bouquet of roses', tag: 'Proposal', category: 'proposal' },
     { src: 'assets/images/proposal-ring-roses.jpg', alt: "Close-up of Ellen's engagement ring surrounded by red roses", tag: 'Proposal', category: 'proposal' },
-    { src: 'assets/images/engagement-ring-closeup.jpg', alt: 'Ellen showing her engagement ring while embracing Chukwuma', tag: 'Proposal', category: 'proposal' },
-    { placeholder: true, caption: 'Baby photo — coming soon', tag: 'Baby Days', category: 'baby' },
-    { placeholder: true, caption: 'Baby photo — coming soon', tag: 'Baby Days', category: 'baby' },
-    { video: true, tag: 'Video', category: 'video' }
+    { src: 'assets/images/engagement-ring-closeup.jpg', alt: 'Ellen showing her engagement ring while embracing Chukwuma', tag: 'Proposal', category: 'proposal' }
   ];
 
   function buildTile(item) {
