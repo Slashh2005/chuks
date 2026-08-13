@@ -140,38 +140,6 @@ p, .rsvp-form label, .faq-item p {
 @keyframes hero-reveal { to { opacity: 1; transform: translateY(0); } }
 @keyframes hero-media-in { to { transform: scale(1); } }
 
-.hero__scroll-cue {
-  position: absolute;
-  left: 50%;
-  bottom: 32px;
-  transform: translateX(-50%);
-  width: 32px;
-  height: 48px;
-  border: 1.5px solid rgba(74,59,50,0.35);
-  border-radius: 999px;
-  display: none;
-}
-.hero__scroll-cue span {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  margin-left: -2px;
-  border-radius: 50%;
-  background: var(--crimson);
-  animation: scroll-cue-dot 1.8s ease-in-out infinite;
-}
-@keyframes scroll-cue-dot {
-  0% { transform: translateY(0); opacity: 1; }
-  70% { transform: translateY(18px); opacity: 0; }
-  71% { transform: translateY(0); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-@media (min-width: 861px) and (min-height: 680px) {
-  .hero__scroll-cue { display: block; }
-}
-
 .hero__names {
   font-family: var(--font-script);
   font-size: clamp(56px, 6.5vw, 92px);
