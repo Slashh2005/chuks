@@ -38,11 +38,9 @@
     { src: 'assets/images/proposal-bouquet-kiss.jpg', alt: 'Chukwuma and Ellen kissing, holding a bouquet of roses', tag: 'Proposal', category: 'proposal' },
     { src: 'assets/images/proposal-ring-roses.jpg', alt: "Close-up of Ellen's engagement ring surrounded by red roses", tag: 'Proposal', category: 'proposal' },
     { src: 'assets/images/engagement-ring-closeup.jpg', alt: 'Ellen showing her engagement ring while embracing Chukwuma', tag: 'Proposal', category: 'proposal' },
-    { placeholder: true, caption: 'Childhood photo — coming soon', tag: 'Childhood', category: 'childhood' },
-    { placeholder: true, caption: 'Childhood photo — coming soon', tag: 'Childhood', category: 'childhood' },
     { placeholder: true, caption: 'Baby photo — coming soon', tag: 'Baby Days', category: 'baby' },
     { placeholder: true, caption: 'Baby photo — coming soon', tag: 'Baby Days', category: 'baby' },
-    { video: true, tag: 'Video Slideshow', category: 'video' }
+    { video: true, tag: 'Video', category: 'video' }
   ];
 
   function buildTile(item) {
@@ -60,7 +58,7 @@
       fig.classList.add('gtile--video');
       fig.innerHTML =
         '<span class="gtile__play" aria-hidden="true">&#9654;</span>' +
-        '<span class="gtile__caption" style="margin-top:10px;">Video slideshow — coming soon</span>' +
+        '<span class="gtile__caption" style="margin-top:10px;">Video coming soon</span>' +
         '<span class="gtile__tag">' + item.tag + '</span>';
     } else {
       var img = document.createElement('img');
@@ -91,7 +89,15 @@
       filterButtons.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
       document.querySelectorAll('.gtile').forEach(function (tile) {
         var match = filter === 'all' || tile.getAttribute('data-category') === filter;
-        tile.classList.toggle('is-hidden', !match);
+        if (match) {
+          tile.classList.remove('is-hidden');
+          requestAnimationFrame(function () { tile.classList.remove('is-filtered-out'); });
+        } else {
+          tile.classList.add('is-filtered-out');
+          setTimeout(function () {
+            if (tile.classList.contains('is-filtered-out')) tile.classList.add('is-hidden');
+          }, 350);
+        }
       });
     });
   });
