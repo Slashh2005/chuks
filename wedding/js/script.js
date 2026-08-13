@@ -1,32 +1,10 @@
 (function () {
   'use strict';
 
-  /* ---------------- Version toggle ---------------- */
-  var versionButtons = document.querySelectorAll('[data-set-version]');
-  versionButtons.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var v = btn.getAttribute('data-set-version');
-      document.body.setAttribute('data-version', v);
-      versionButtons.forEach(function (b) {
-        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
-      });
-      try { localStorage.setItem('wedding-preview-version', v); } catch (e) {}
-    });
-  });
-  try {
-    var saved = localStorage.getItem('wedding-preview-version');
-    if (saved) {
-      document.body.setAttribute('data-version', saved);
-      versionButtons.forEach(function (b) {
-        b.setAttribute('aria-pressed', b.getAttribute('data-set-version') === saved ? 'true' : 'false');
-      });
-    }
-  } catch (e) {}
-
   /* ---------------- Countdown ---------------- */
   var WEDDING_DATE = new Date('2026-12-18T13:00:00');
 
-  function updateCountdowns() {
+  function updateCountdown() {
     var now = new Date();
     var diff = Math.max(0, WEDDING_DATE - now);
 
@@ -37,19 +15,19 @@
 
     var pad = function (n) { return String(n).padStart(2, '0'); };
 
-    document.querySelectorAll('[data-countdown]').forEach(function (el) {
-      var d = el.querySelector('[data-days]');
-      var h = el.querySelector('[data-hours]');
-      var m = el.querySelector('[data-minutes]');
-      var s = el.querySelector('[data-seconds]');
-      if (d) d.textContent = days;
-      if (h) h.textContent = pad(hours);
-      if (m) m.textContent = pad(minutes);
-      if (s) s.textContent = pad(seconds);
-    });
+    var el = document.querySelector('[data-countdown]');
+    if (!el) return;
+    var d = el.querySelector('[data-days]');
+    var h = el.querySelector('[data-hours]');
+    var m = el.querySelector('[data-minutes]');
+    var s = el.querySelector('[data-seconds]');
+    if (d) d.textContent = days;
+    if (h) h.textContent = pad(hours);
+    if (m) m.textContent = pad(minutes);
+    if (s) s.textContent = pad(seconds);
   }
-  updateCountdowns();
-  setInterval(updateCountdowns, 1000);
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 
   /* ---------------- Gallery data ---------------- */
   var GALLERY_ITEMS = [
@@ -60,10 +38,10 @@
     { src: 'assets/images/proposal-bouquet-kiss.jpg', alt: 'Chukwuma and Ellen kissing, holding a bouquet of roses', tag: 'Proposal', category: 'proposal' },
     { src: 'assets/images/proposal-ring-roses.jpg', alt: "Close-up of Ellen's engagement ring surrounded by red roses", tag: 'Proposal', category: 'proposal' },
     { src: 'assets/images/engagement-ring-closeup.jpg', alt: 'Ellen showing her engagement ring while embracing Chukwuma', tag: 'Proposal', category: 'proposal' },
-    { placeholder: true, icon: '🧸', caption: 'Childhood photo — coming soon', tag: 'Childhood', category: 'childhood' },
-    { placeholder: true, icon: '🎠', caption: 'Childhood photo — coming soon', tag: 'Childhood', category: 'childhood' },
-    { placeholder: true, icon: '👶', caption: 'Baby photo — coming soon', tag: 'Baby Days', category: 'baby' },
-    { placeholder: true, icon: '🍼', caption: 'Baby photo — coming soon', tag: 'Baby Days', category: 'baby' },
+    { placeholder: true, caption: 'Childhood photo — coming soon', tag: 'Childhood', category: 'childhood' },
+    { placeholder: true, caption: 'Childhood photo — coming soon', tag: 'Childhood', category: 'childhood' },
+    { placeholder: true, caption: 'Baby photo — coming soon', tag: 'Baby Days', category: 'baby' },
+    { placeholder: true, caption: 'Baby photo — coming soon', tag: 'Baby Days', category: 'baby' },
     { video: true, tag: 'Video Slideshow', category: 'video' }
   ];
 
@@ -75,13 +53,13 @@
     if (item.placeholder) {
       fig.classList.add('gtile--placeholder');
       fig.innerHTML =
-        '<span class="gtile__icon" aria-hidden="true">' + item.icon + '</span>' +
+        '<span class="gtile__monogram" aria-hidden="true">C &middot; E</span>' +
         '<span class="gtile__caption">' + item.caption + '</span>' +
         '<span class="gtile__tag">' + item.tag + '</span>';
     } else if (item.video) {
       fig.classList.add('gtile--video');
       fig.innerHTML =
-        '<span class="gtile__play" aria-hidden="true">▶</span>' +
+        '<span class="gtile__play" aria-hidden="true">&#9654;</span>' +
         '<span class="gtile__caption" style="margin-top:10px;">Video slideshow — coming soon</span>' +
         '<span class="gtile__tag">' + item.tag + '</span>';
     } else {
@@ -98,13 +76,12 @@
     return fig;
   }
 
-  ['gallery-v1', 'gallery-v2', 'gallery-v3', 'gallery-v4'].forEach(function (id) {
-    var grid = document.getElementById(id);
-    if (!grid) return;
+  var galleryGrid = document.getElementById('gallery-grid');
+  if (galleryGrid) {
     GALLERY_ITEMS.forEach(function (item) {
-      grid.appendChild(buildTile(item));
+      galleryGrid.appendChild(buildTile(item));
     });
-  });
+  }
 
   /* ---------------- Gallery filtering ---------------- */
   var filterButtons = document.querySelectorAll('.gallery-filter');
@@ -132,7 +109,7 @@
   }
 
   /* ---------------- Scroll reveal ---------------- */
-  var revealEls = document.querySelectorAll('.reveal');
+  var revealEls = document.querySelectorAll('.reveal, .gallery-grid .gtile, .details-grid .detail-card, .faq-list .faq-item');
   if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -145,5 +122,21 @@
     revealEls.forEach(function (el) { observer.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+
+  /* ---------------- Subtle hero parallax ---------------- */
+  var heroMedia = document.querySelector('.hero__media img');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (heroMedia && !reduceMotion) {
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var offset = Math.min(window.scrollY * 0.12, 60);
+        heroMedia.style.transform = 'translateY(' + offset + 'px) scale(1.06)';
+        ticking = false;
+      });
+    }, { passive: true });
   }
 })();
