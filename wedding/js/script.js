@@ -105,9 +105,23 @@
   if (rsvpForm) {
     rsvpForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      rsvpForm.hidden = true;
-      rsvpSuccess.hidden = false;
-      rsvpSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var submitBtn = rsvpForm.querySelector('button[type="submit"]');
+      var originalLabel = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+      fetch(rsvpForm.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(rsvpForm)
+      }).then(function (res) {
+        if (!res.ok) throw new Error('RSVP request failed');
+        rsvpForm.hidden = true;
+        rsvpSuccess.hidden = false;
+        rsvpSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }).catch(function () {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
+        window.alert("Sorry, your RSVP couldn't be sent — please check your connection and try again.");
+      });
     });
   }
 
