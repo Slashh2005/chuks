@@ -34,6 +34,7 @@
     { src: 'assets/images/engagement-garden.jpg', alt: 'Chukwuma and Ellen in a garden setting', tag: 'Engagement', category: 'engagement' },
     { src: 'assets/images/engagement-candid-laugh.jpg', alt: 'Ellen laughing with Chukwuma', tag: 'Engagement', category: 'engagement' },
     { src: 'assets/images/engagement-candid-embrace.jpg', alt: 'Chukwuma and Ellen sharing a joyful embrace', tag: 'Engagement', category: 'engagement' },
+    { src: 'assets/images/engagement-piggyback-ring.jpg', alt: 'Ellen showing her engagement ring while Chukwuma carries her piggyback in a garden', tag: 'Engagement', category: 'engagement' },
     { src: 'assets/images/proposal-arch-kiss.jpg', alt: "Chukwuma and Ellen embracing beneath a floral arch reading 'Will You Marry Me?'", tag: 'Proposal', category: 'proposal' },
     { src: 'assets/images/proposal-bouquet-kiss.jpg', alt: 'Chukwuma and Ellen kissing, holding a bouquet of roses', tag: 'Proposal', category: 'proposal' },
     { src: 'assets/images/proposal-ring-roses.jpg', alt: "Close-up of Ellen's engagement ring surrounded by red roses", tag: 'Proposal', category: 'proposal' },
