@@ -37,7 +37,11 @@
     { src: 'assets/images/proposal-arch-kiss.jpg', alt: "Chukwuma and Ellen embracing beneath a floral arch reading 'Will You Marry Me?'", tag: 'Proposal', category: 'proposal' },
     { src: 'assets/images/proposal-bouquet-kiss.jpg', alt: 'Chukwuma and Ellen kissing, holding a bouquet of roses', tag: 'Proposal', category: 'proposal' },
     { src: 'assets/images/proposal-ring-roses.jpg', alt: "Close-up of Ellen's engagement ring surrounded by red roses", tag: 'Proposal', category: 'proposal' },
-    { src: 'assets/images/engagement-ring-closeup.jpg', alt: 'Ellen showing her engagement ring while embracing Chukwuma', tag: 'Proposal', category: 'proposal' }
+    { src: 'assets/images/engagement-ring-closeup.jpg', alt: 'Ellen showing her engagement ring while embracing Chukwuma', tag: 'Proposal', category: 'proposal' },
+    { src: 'assets/images/traditional-ceremony-kiss.jpg', alt: 'Chukwuma and Ellen sharing a kiss in matching traditional attire, Ellen holding a bouquet', tag: 'Traditional', category: 'traditional' },
+    { src: 'assets/images/traditional-ceremony-portrait.jpg', alt: 'Chukwuma and Ellen smiling together in matching traditional attire', tag: 'Traditional', category: 'traditional' },
+    { src: 'assets/images/childhood-chukwuma.jpg', alt: 'Chukwuma as a young child', tag: 'Childhood', category: 'childhood' },
+    { src: 'assets/images/childhood-ellen.jpg', alt: 'Ellen as a young child', tag: 'Childhood', category: 'childhood' }
   ];
 
   function buildTile(item) {
