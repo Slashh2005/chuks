@@ -277,12 +277,6 @@ p, .rsvp-form label, .faq-item p {
 .proposal-grid__item:hover img { transform: scale(1.05); }
 
 .traditional-ceremony { margin-top: 96px; text-align: center; }
-.traditional-ceremony__body {
-  max-width: 560px;
-  margin: -32px auto 40px;
-  color: var(--espresso-soft);
-  font-size: 18px;
-}
 .traditional-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
