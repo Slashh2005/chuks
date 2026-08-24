@@ -535,12 +535,37 @@ p, .rsvp-form label, .faq-item p {
 .stays-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 64px; }
 .stay-card { border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease); }
 .stay-card:hover { transform: translateY(-6px); box-shadow: 0 28px 48px -28px rgba(74,59,50,0.28); }
-.stay-card__media {
+.stay-card__gallery {
+  position: relative;
   aspect-ratio: 4/3;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
   background: linear-gradient(155deg, var(--taupe), #f2ede6);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-script); font-size: 34px; color: var(--espresso-soft); opacity: 0.6;
   border-bottom: 1px solid var(--line);
+}
+.stay-card__gallery::before {
+  content: attr(data-fallback);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-script);
+  font-size: 34px;
+  color: var(--espresso-soft);
+  opacity: 0.6;
+  pointer-events: none;
+}
+.stay-card__gallery img {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .stay-card__body { padding: 26px 28px 30px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .stay-card__tier { font-family: var(--font-label); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink); }
