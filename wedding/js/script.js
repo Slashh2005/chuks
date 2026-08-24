@@ -29,81 +29,6 @@
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  /* ---------------- Gallery data ---------------- */
-  var GALLERY_ITEMS = [
-    { src: 'assets/images/engagement-garden.jpg', alt: 'Chukwuma and Ellen in a garden setting', tag: 'Engagement', category: 'engagement' },
-    { src: 'assets/images/engagement-candid-laugh.jpg', alt: 'Ellen laughing with Chukwuma', tag: 'Engagement', category: 'engagement' },
-    { src: 'assets/images/engagement-candid-embrace.jpg', alt: 'Chukwuma and Ellen sharing a joyful embrace', tag: 'Engagement', category: 'engagement' },
-    { src: 'assets/images/engagement-piggyback-ring.jpg', alt: 'Ellen showing her engagement ring while Chukwuma carries her piggyback in a garden', tag: 'Engagement', category: 'engagement' },
-    { src: 'assets/images/proposal-arch-kiss.jpg', alt: "Chukwuma and Ellen embracing beneath a floral arch reading 'Will You Marry Me?'", tag: 'Proposal', category: 'proposal' },
-    { src: 'assets/images/proposal-bouquet-kiss.jpg', alt: 'Chukwuma and Ellen kissing, holding a bouquet of roses', tag: 'Proposal', category: 'proposal' },
-    { src: 'assets/images/proposal-ring-roses.jpg', alt: "Close-up of Ellen's engagement ring surrounded by red roses", tag: 'Proposal', category: 'proposal' },
-    { src: 'assets/images/engagement-ring-closeup.jpg', alt: 'Ellen showing her engagement ring while embracing Chukwuma', tag: 'Proposal', category: 'proposal' },
-    { src: 'assets/images/traditional-ceremony-kiss.jpg', alt: 'Chukwuma and Ellen sharing a kiss in matching traditional attire, Ellen holding a bouquet', tag: 'Traditional', category: 'traditional' },
-    { src: 'assets/images/traditional-ceremony-portrait.jpg', alt: 'Chukwuma and Ellen smiling together in matching traditional attire', tag: 'Traditional', category: 'traditional' },
-    { src: 'assets/images/childhood-chukwuma.jpg', alt: 'Chukwuma as a young child', tag: 'Childhood', category: 'childhood' },
-    { src: 'assets/images/childhood-ellen.jpg', alt: 'Ellen as a young child', tag: 'Childhood', category: 'childhood' }
-  ];
-
-  function buildTile(item) {
-    var fig = document.createElement('figure');
-    fig.className = 'gtile';
-    fig.setAttribute('data-category', item.category);
-
-    if (item.placeholder) {
-      fig.classList.add('gtile--placeholder');
-      fig.innerHTML =
-        '<span class="gtile__monogram" aria-hidden="true">C &middot; E</span>' +
-        '<span class="gtile__caption">' + item.caption + '</span>' +
-        '<span class="gtile__tag">' + item.tag + '</span>';
-    } else if (item.video) {
-      fig.classList.add('gtile--video');
-      fig.innerHTML =
-        '<span class="gtile__play" aria-hidden="true">&#9654;</span>' +
-        '<span class="gtile__caption" style="margin-top:10px;">Video coming soon</span>' +
-        '<span class="gtile__tag">' + item.tag + '</span>';
-    } else {
-      var img = document.createElement('img');
-      img.src = item.src;
-      img.alt = item.alt;
-      img.loading = 'lazy';
-      var tag = document.createElement('span');
-      tag.className = 'gtile__tag';
-      tag.textContent = item.tag;
-      fig.appendChild(img);
-      fig.appendChild(tag);
-    }
-    return fig;
-  }
-
-  var galleryGrid = document.getElementById('gallery-grid');
-  if (galleryGrid) {
-    GALLERY_ITEMS.forEach(function (item) {
-      galleryGrid.appendChild(buildTile(item));
-    });
-  }
-
-  /* ---------------- Gallery filtering ---------------- */
-  var filterButtons = document.querySelectorAll('.gallery-filter');
-  filterButtons.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var filter = btn.getAttribute('data-filter');
-      filterButtons.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
-      document.querySelectorAll('.gtile').forEach(function (tile) {
-        var match = filter === 'all' || tile.getAttribute('data-category') === filter;
-        if (match) {
-          tile.classList.remove('is-hidden');
-          requestAnimationFrame(function () { tile.classList.remove('is-filtered-out'); });
-        } else {
-          tile.classList.add('is-filtered-out');
-          setTimeout(function () {
-            if (tile.classList.contains('is-filtered-out')) tile.classList.add('is-hidden');
-          }, 350);
-        }
-      });
-    });
-  });
-
   /* ---------------- RSVP form ---------------- */
   var rsvpForm = document.getElementById('rsvp-form');
   var rsvpSuccess = document.getElementById('rsvp-success');
@@ -131,7 +56,7 @@
   }
 
   /* ---------------- Scroll reveal ---------------- */
-  var revealEls = document.querySelectorAll('.reveal, .gallery-grid .gtile, .details-grid .detail-card, .faq-list .faq-item');
+  var revealEls = document.querySelectorAll('.reveal, .details-grid .detail-card, .faq-list .faq-item');
   if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
