@@ -5,10 +5,10 @@
 :root {
   --warm-white: #FCFBF9;
   --espresso: #4A3B32;
-  --crimson: #BE1E2D;
+  --pink: #DB2777;
   --taupe: #E8E2DB;
 
-  --crimson-deep: #8f1620;
+  --pink-deep: #BE185D;
   --espresso-soft: #7a685c;
   --line: rgba(74, 59, 50, 0.14);
 
@@ -69,7 +69,7 @@ p, .rsvp-form label, .faq-item p {
   font-size: 15px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--crimson);
+  color: var(--pink);
   margin: 0 0 18px;
 }
 .eyebrow--center { text-align: center; }
@@ -100,12 +100,12 @@ p, .rsvp-form label, .faq-item p {
   transition: all 0.35s var(--ease);
 }
 .btn--solid {
-  background: var(--crimson);
+  background: var(--pink);
   color: var(--warm-white);
-  border-color: var(--crimson);
+  border-color: var(--pink);
 }
-.btn--solid:hover { background: var(--crimson-deep); border-color: var(--crimson-deep); transform: translateY(-2px); }
-.btn--solid:focus-visible { outline: 2px solid var(--crimson-deep); outline-offset: 3px; }
+.btn--solid:hover { background: var(--pink-deep); border-color: var(--pink-deep); transform: translateY(-2px); }
+.btn--solid:focus-visible { outline: 2px solid var(--pink-deep); outline-offset: 3px; }
 
 /* =========================================================
    HERO
@@ -147,7 +147,7 @@ p, .rsvp-form label, .faq-item p {
   margin: 6px 0 20px;
   color: var(--espresso);
 }
-.hero__rule { display: inline-block; width: 56px; height: 2px; background: var(--crimson); margin: 0 0 18px; }
+.hero__rule { display: inline-block; width: 56px; height: 2px; background: var(--pink); margin: 0 0 18px; }
 .hero__date {
   font-family: var(--font-label);
   letter-spacing: 0.22em;
@@ -190,7 +190,7 @@ p, .rsvp-form label, .faq-item p {
   float: left;
   line-height: 0.68;
   padding: 0.08em 0.1em 0 0;
-  color: var(--crimson);
+  color: var(--pink);
   font-weight: 400;
 }
 .prose__quote {
@@ -268,7 +268,7 @@ p, .rsvp-form label, .faq-item p {
 }
 .proposal-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 18px;
 }
 .proposal-grid__item { margin: 0; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 18px 40px -22px rgba(74,59,50,0.3); }
@@ -295,7 +295,7 @@ p, .rsvp-form label, .faq-item p {
 }
 .detail-card {
   padding: 46px 36px;
-  border-top: 2px solid var(--crimson);
+  border-top: 2px solid var(--pink);
   background: var(--warm-white);
   box-shadow: 0 1px 0 var(--line), 0 24px 48px -32px rgba(74,59,50,0.22);
   text-align: center;
@@ -315,9 +315,9 @@ p, .rsvp-form label, .faq-item p {
 }
 .detail-card__divider { width: 1px; align-self: stretch; background: var(--line); }
 .detail-card__title { font-family: var(--font-heading); font-size: 24px; margin: 0 0 10px; letter-spacing: 0.02em; }
-.detail-card__time { font-family: var(--font-label); letter-spacing: 0.1em; color: var(--crimson); margin: 0 0 12px; font-size: 15px; }
+.detail-card__time { font-family: var(--font-label); letter-spacing: 0.1em; color: var(--pink); margin: 0 0 12px; font-size: 15px; }
 .detail-card__place { margin: 0 0 18px; color: var(--espresso-soft); font-size: 17px; }
-.detail-card__link { font-family: var(--font-label); font-size: 13px; letter-spacing: 0.04em; border-bottom: 1px solid var(--crimson); color: var(--crimson); padding-bottom: 2px; }
+.detail-card__link { font-family: var(--font-label); font-size: 13px; letter-spacing: 0.04em; border-bottom: 1px solid var(--pink); color: var(--pink); padding-bottom: 2px; }
 
 .dress-code { text-align: center; max-width: 600px; margin: 0 auto; }
 .dress-code__title { font-family: var(--font-heading); font-size: 22px; margin: 0 0 14px; }
@@ -331,7 +331,7 @@ p, .rsvp-form label, .faq-item p {
   font-size: 16px;
   color: var(--espresso-soft);
 }
-.stays-cta a { color: var(--crimson); border-bottom: 1px solid var(--crimson); padding-bottom: 1px; }
+.stays-cta a { color: var(--pink); border-bottom: 1px solid var(--pink); padding-bottom: 1px; }
 
 /* Registry */
 .registry__body { text-align: center; color: var(--espresso-soft); font-style: italic; font-size: 21px; }
@@ -364,7 +364,7 @@ p, .rsvp-form label, .faq-item p {
   content: '+';
   font-family: var(--font-label);
   font-size: 22px;
-  color: var(--crimson);
+  color: var(--pink);
   transition: transform 0.3s var(--ease);
   flex-shrink: 0;
 }
@@ -414,7 +414,7 @@ p, .rsvp-form label, .faq-item p {
   transition: border-color 0.2s var(--ease);
 }
 .rsvp-form input[type="text"]::placeholder { color: rgba(74,59,50,0.38); }
-.rsvp-form input[type="text"]:focus { outline: none; border-color: var(--crimson); }
+.rsvp-form input[type="text"]:focus { outline: none; border-color: var(--pink); }
 
 .rsvp-form__toggle {
   position: relative;
@@ -432,8 +432,8 @@ p, .rsvp-form label, .faq-item p {
   left: 4px;
   width: calc(50% - 4px);
   border-radius: 999px;
-  background: var(--crimson);
-  box-shadow: 0 6px 16px -6px rgba(190,30,45,0.55);
+  background: var(--pink);
+  box-shadow: 0 6px 16px -6px rgba(219,39,119,0.5);
   transition: transform 0.4s var(--ease);
 }
 .rsvp-form__toggle:has(.toggle-option:last-child input:checked)::before {
@@ -527,7 +527,7 @@ p, .rsvp-form label, .faq-item p {
   gap: 8px;
   transition: color 0.2s var(--ease);
 }
-.page-header__back:hover { color: var(--crimson); }
+.page-header__back:hover { color: var(--pink); }
 
 .stays-hero { text-align: center; padding-top: 100px; }
 .stays-hero__intro { max-width: 620px; margin: 0 auto 0; text-align: center; color: var(--espresso-soft); }
@@ -543,7 +543,7 @@ p, .rsvp-form label, .faq-item p {
   border-bottom: 1px solid var(--line);
 }
 .stay-card__body { padding: 26px 28px 30px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-.stay-card__tier { font-family: var(--font-label); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--crimson); }
+.stay-card__tier { font-family: var(--font-label); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink); }
 .stay-card__name { font-family: var(--font-heading); font-size: 22px; margin: 0; }
 .stay-card__distance { color: var(--espresso-soft); font-size: 15px; margin: 0 0 6px; }
 .stay-card__link {
@@ -551,8 +551,8 @@ p, .rsvp-form label, .faq-item p {
   font-family: var(--font-label);
   font-size: 13px;
   letter-spacing: 0.04em;
-  border-bottom: 1px solid var(--crimson);
-  color: var(--crimson);
+  border-bottom: 1px solid var(--pink);
+  color: var(--pink);
   align-self: flex-start;
   padding-bottom: 2px;
 }
