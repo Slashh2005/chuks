@@ -258,33 +258,16 @@ p, .rsvp-form label, .faq-item p {
 }
 .favourite-photo__frame img { width: 100%; aspect-ratio: 4/5; object-fit: cover; transition: transform 0.6s var(--ease); }
 .favourite-photo__frame:hover img { transform: scale(1.04); }
-.favourite-photo__frame figcaption {
-  padding: 16px;
-  font-family: var(--font-heading);
-  font-style: italic;
-  font-size: 19px;
-  color: var(--espresso-soft);
-  background: var(--warm-white);
-}
 
 /* =========================================================
    SHARED SECTIONS
    ========================================================= */
 .love-story { background: var(--warm-white); }
-.proposal { background: var(--taupe); }
+.proposal { background: var(--warm-white); }
 .details { background: var(--warm-white); }
-.registry { background: var(--taupe); }
-.faq { background: var(--taupe); }
+.registry { background: var(--warm-white); }
+.faq { background: var(--warm-white); }
 
-.proposal__date {
-  text-align: center;
-  font-family: var(--font-label);
-  letter-spacing: 0.14em;
-  color: var(--espresso-soft);
-  margin: -32px 0 48px;
-  font-size: 14px;
-  text-transform: uppercase;
-}
 .proposal-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -314,7 +297,6 @@ p, .rsvp-form label, .faq-item p {
 }
 .detail-card {
   padding: 46px 36px;
-  border-top: 2px solid var(--pink);
   background: var(--warm-white);
   box-shadow: 0 1px 0 var(--line), 0 24px 48px -32px rgba(74,59,50,0.22);
   text-align: center;
@@ -327,7 +309,7 @@ p, .rsvp-form label, .faq-item p {
 .detail-card--combined {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  align-items: center;
+  align-items: start;
   gap: 40px;
   max-width: 680px;
   margin: 0 auto;
@@ -336,7 +318,15 @@ p, .rsvp-form label, .faq-item p {
 .detail-card__title { font-family: var(--font-heading); font-size: 24px; margin: 0 0 10px; letter-spacing: 0.02em; }
 .detail-card__time { font-family: var(--font-label); letter-spacing: 0.1em; color: var(--pink); margin: 0 0 12px; font-size: 15px; }
 .detail-card__place { margin: 0 0 18px; color: var(--espresso-soft); font-size: 17px; }
-.detail-card__link { font-family: var(--font-label); font-size: 13px; letter-spacing: 0.04em; border-bottom: 1px solid var(--pink); color: var(--pink); padding-bottom: 2px; }
+.detail-card__link { display: inline-block; font-family: var(--font-label); font-size: 13px; letter-spacing: 0.04em; border-bottom: 1px solid var(--pink); color: var(--pink); padding-bottom: 2px; }
+.detail-card__map {
+  display: block;
+  width: 100%;
+  height: 200px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  margin: 18px 0 14px;
+}
 
 .dress-code { text-align: center; max-width: 600px; margin: 0 auto; }
 .dress-code__title { font-family: var(--font-heading); font-size: 22px; margin: 0 0 14px; }
@@ -524,7 +514,8 @@ p, .rsvp-form label, .faq-item p {
    FOOTER
    ========================================================= */
 .footer {
-  background: var(--taupe);
+  background: var(--warm-white);
+  border-top: 1px solid var(--line);
   color: var(--espresso);
   text-align: center;
   padding: 56px 24px;
@@ -606,7 +597,8 @@ p, .rsvp-form label, .faq-item p {
   margin: 56px auto 0;
   text-align: center;
   padding: 28px 32px;
-  background: var(--taupe);
+  background: var(--warm-white);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   color: var(--espresso-soft);
   font-size: 16px;
