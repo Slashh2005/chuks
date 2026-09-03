@@ -212,7 +212,6 @@ p, .rsvp-form label, .faq-item p {
 .story-photos__item { margin: 0; overflow: hidden; border-radius: var(--radius-md); }
 .story-photos__item img { width: 100%; height: 100%; object-fit: cover; min-height: 260px; transition: transform 0.7s var(--ease); }
 .story-photos__item:hover img { transform: scale(1.045); }
-.story-photos__item--tall img { min-height: 380px; }
 
 .childhood-photos { margin-top: 64px; text-align: center; }
 .childhood-photos__caption {
