@@ -205,7 +205,7 @@ p, .rsvp-form label, .faq-item p {
 
 .story-photos {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   align-items: stretch;
 }
@@ -247,17 +247,6 @@ p, .rsvp-form label, .faq-item p {
   color: var(--espresso-soft);
   text-align: center;
 }
-
-.favourite-photo { margin-top: 64px; text-align: center; }
-.favourite-photo__frame {
-  margin: 0 auto;
-  max-width: 480px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: 0 24px 56px -28px rgba(74,59,50,0.32);
-}
-.favourite-photo__frame img { width: 100%; aspect-ratio: 4/5; object-fit: cover; transition: transform 0.6s var(--ease); }
-.favourite-photo__frame:hover img { transform: scale(1.04); }
 
 /* =========================================================
    SHARED SECTIONS
