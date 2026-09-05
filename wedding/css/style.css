@@ -486,6 +486,7 @@ p, .rsvp-form label, .faq-item p {
   padding: 56px 24px;
 }
 .footer__names { font-family: var(--font-script); font-size: 36px; margin: 0 0 6px; }
+.footer__names .amp { font-size: 0.6em; }
 .footer__sub { font-family: var(--font-label); font-size: 12px; letter-spacing: 0.24em; color: var(--espresso-soft); margin: 0; }
 
 /* =========================================================
