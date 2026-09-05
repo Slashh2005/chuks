@@ -299,10 +299,12 @@ p, .rsvp-form label, .faq-item p {
 .stays-cta {
   text-align: center;
   margin: 56px auto 0;
-  font-size: 20px;
-  color: var(--espresso-soft);
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--espresso);
 }
-.stays-cta a { display: inline-block; margin-top: 10px; color: var(--pink); border-bottom: 1px solid var(--pink); padding-bottom: 1px; }
+.stays-cta a { display: inline-block; margin-top: 10px; font-weight: 400; color: var(--pink); border-bottom: 1px solid var(--pink); padding-bottom: 1px; }
 
 /* Registry */
 .registry__body { text-align: center; color: var(--espresso-soft); font-style: italic; font-size: 21px; }
