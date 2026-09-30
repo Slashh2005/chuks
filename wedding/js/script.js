@@ -45,7 +45,7 @@
       if (!res.ok) throw new Error('RSVP request failed');
       return res.json().catch(function () { return {}; });
     }).then(function (data) {
-      // FormSubmit can answer 200 with success "false" (e.g. form not activated).
+      // Web3Forms can answer with success: false (e.g. an invalid access key).
       if (data && String(data.success) === 'false') throw new Error(data.message || 'RSVP rejected');
     });
   }
