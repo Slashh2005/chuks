@@ -453,6 +453,17 @@ p, .rsvp-form label, .faq-item p {
   font-size: 19px;
 }
 
+.rsvp-fallback {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.rsvp-fallback p {
+  margin: 0 0 18px;
+  font-family: var(--font-body);
+  font-size: 18px;
+}
+
 /* ---------- RSVP page (split layout) ---------- */
 .rsvp-page {
   display: grid;
