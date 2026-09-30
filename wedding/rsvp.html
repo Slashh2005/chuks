@@ -33,11 +33,11 @@
         <p class="rsvp__intro reveal">We can't wait to celebrate with you. Please let us know if you'll be joining us.</p>
 
         <div class="rsvp-card reveal">
-          <form class="rsvp-form" id="rsvp-form" action="https://formsubmit.co/ajax/chukwumaajaegbu34@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="New RSVP — Chukwuma &amp; Ellen's Wedding">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <form class="rsvp-form" id="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="1d611bed-2a15-430d-aade-71f5cd6df699">
+            <input type="hidden" name="subject" value="New RSVP — Chukwuma &amp; Ellen's Wedding">
+            <input type="hidden" name="from_name" value="Chukwuma &amp; Ellen Wedding Website">
+            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
             <div class="rsvp-form__field rsvp-form__field--full">
               <label for="guest-name">Full Name</label>
@@ -69,6 +69,11 @@
 
           <div class="rsvp-success" id="rsvp-success" hidden>
             <p>Thank you! Your RSVP has been received — we can't wait to celebrate with you.</p>
+          </div>
+
+          <div class="rsvp-fallback" id="rsvp-fallback" hidden>
+            <p>Our RSVP service is having trouble right now. Please tap below to send your RSVP by email instead — your details are already filled in.</p>
+            <a class="btn btn--solid" id="rsvp-fallback-link" href="mailto:chukwumaajaegbu34@gmail.com">Send RSVP by Email</a>
           </div>
         </div>
       </div>

@@ -32,25 +32,67 @@
   /* ---------------- RSVP form ---------------- */
   var rsvpForm = document.getElementById('rsvp-form');
   var rsvpSuccess = document.getElementById('rsvp-success');
+  var rsvpFallback = document.getElementById('rsvp-fallback');
+  var rsvpFallbackLink = document.getElementById('rsvp-fallback-link');
+  var RSVP_EMAIL = 'chukwumaajaegbu34@gmail.com';
+
+  function sendRsvp(form) {
+    return fetch(form.action, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    }).then(function (res) {
+      if (!res.ok) throw new Error('RSVP request failed');
+      return res.json().catch(function () { return {}; });
+    }).then(function (data) {
+      // Web3Forms can answer with success: false (e.g. an invalid access key).
+      if (data && String(data.success) === 'false') throw new Error(data.message || 'RSVP rejected');
+    });
+  }
+
+  // Build a pre-filled email so guests can still RSVP if the form service is down.
+  function rsvpMailto(form) {
+    var get = function (name) {
+      var el = form.elements[name];
+      return el && el.value ? el.value.trim() : '';
+    };
+    var attending = get('attending') === 'yes' ? 'Joyfully accepts' : get('attending') === 'no' ? 'Regretfully declines' : '';
+    var body = [
+      'Full name: ' + get('guest-name'),
+      'Attending: ' + attending,
+      'Dietary requirements: ' + (get('dietary') || 'None'),
+      'Allergies: ' + (get('allergies') || 'None')
+    ].join('\n');
+    return 'mailto:' + RSVP_EMAIL +
+      '?subject=' + encodeURIComponent('RSVP — ' + get('guest-name')) +
+      '&body=' + encodeURIComponent(body);
+  }
+
   if (rsvpForm) {
     rsvpForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var submitBtn = rsvpForm.querySelector('button[type="submit"]');
       var originalLabel = submitBtn ? submitBtn.textContent : '';
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+      if (rsvpFallback) rsvpFallback.hidden = true;
 
-      fetch(rsvpForm.action, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(rsvpForm)
-      }).then(function (res) {
-        if (!res.ok) throw new Error('RSVP request failed');
+      sendRsvp(rsvpForm).catch(function () {
+        // One retry for a brief network or service hiccup.
+        return new Promise(function (resolve) { setTimeout(resolve, 1500); })
+          .then(function () { return sendRsvp(rsvpForm); });
+      }).then(function () {
         rsvpForm.hidden = true;
         rsvpSuccess.hidden = false;
         rsvpSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }).catch(function () {
         if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
-        window.alert("Sorry, your RSVP couldn't be sent — please check your connection and try again.");
+        if (rsvpFallback && rsvpFallbackLink) {
+          rsvpFallbackLink.href = rsvpMailto(rsvpForm);
+          rsvpFallback.hidden = false;
+          rsvpFallback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          window.alert("Sorry, your RSVP couldn't be sent — please check your connection and try again.");
+        }
       });
     });
   }
