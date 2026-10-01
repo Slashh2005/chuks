@@ -32,9 +32,13 @@
   /* ---------------- RSVP form ---------------- */
   var rsvpForm = document.getElementById('rsvp-form');
   var rsvpSuccess = document.getElementById('rsvp-success');
-  var rsvpFallback = document.getElementById('rsvp-fallback');
-  var rsvpFallbackLink = document.getElementById('rsvp-fallback-link');
-  var RSVP_EMAIL = 'chukwumaajaegbu34@gmail.com';
+  var rsvpRedirect = document.getElementById('rsvp-redirect');
+
+  function showRsvpSuccess() {
+    rsvpForm.hidden = true;
+    rsvpSuccess.hidden = false;
+    rsvpSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
   function sendRsvp(form) {
     return fetch(form.action, {
@@ -50,49 +54,21 @@
     });
   }
 
-  // Build a pre-filled email so guests can still RSVP if the form service is down.
-  function rsvpMailto(form) {
-    var get = function (name) {
-      var el = form.elements[name];
-      return el && el.value ? el.value.trim() : '';
-    };
-    var attending = get('attending') === 'yes' ? 'Joyfully accepts' : get('attending') === 'no' ? 'Regretfully declines' : '';
-    var body = [
-      'Full name: ' + get('guest-name'),
-      'Attending: ' + attending,
-      'Dietary requirements: ' + (get('dietary') || 'None'),
-      'Allergies: ' + (get('allergies') || 'None')
-    ].join('\n');
-    return 'mailto:' + RSVP_EMAIL +
-      '?subject=' + encodeURIComponent('RSVP — ' + get('guest-name')) +
-      '&body=' + encodeURIComponent(body);
-  }
-
   if (rsvpForm) {
+    // Web3Forms sends guests back here with ?sent=1 after a regular form post.
+    if (/[?&]sent=1\b/.test(window.location.search)) showRsvpSuccess();
+
     rsvpForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var submitBtn = rsvpForm.querySelector('button[type="submit"]');
-      var originalLabel = submitBtn ? submitBtn.textContent : '';
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
-      if (rsvpFallback) rsvpFallback.hidden = true;
 
-      sendRsvp(rsvpForm).catch(function () {
-        // One retry for a brief network or service hiccup.
-        return new Promise(function (resolve) { setTimeout(resolve, 1500); })
-          .then(function () { return sendRsvp(rsvpForm); });
-      }).then(function () {
-        rsvpForm.hidden = true;
-        rsvpSuccess.hidden = false;
-        rsvpSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }).catch(function () {
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
-        if (rsvpFallback && rsvpFallbackLink) {
-          rsvpFallbackLink.href = rsvpMailto(rsvpForm);
-          rsvpFallback.hidden = false;
-          rsvpFallback.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          window.alert("Sorry, your RSVP couldn't be sent — please check your connection and try again.");
-        }
+      sendRsvp(rsvpForm).then(showRsvpSuccess).catch(function () {
+        // A background request can't pass Web3Forms' Cloudflare security check
+        // and hides its error message, so post the form as a normal page instead.
+        // Web3Forms then redirects back to this page, or shows its own error.
+        if (rsvpRedirect) rsvpRedirect.value = window.location.origin + window.location.pathname + '?sent=1';
+        HTMLFormElement.prototype.submit.call(rsvpForm);
       });
     });
   }
